@@ -12,7 +12,7 @@ API_ID = int(getenv('api_id'))
 API_HASH = getenv('api_hash')
 client = TelegramClient('anon', API_ID, API_HASH)
 
-OTHER_CHAT_ID = int(getenv('other_channel_id'))
+OTHER_CHAT_ID = getenv('other_channel_id')
 MY_CHAT_ID = int(getenv('my_channel_id'))
 PD_CHAT_ID = getenv('pd_chat_id')
 

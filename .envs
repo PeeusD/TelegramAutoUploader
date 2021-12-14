@@ -1,0 +1,6 @@
+#rename this file to .env to work with this
+api_id = UR API ID       # Your API ID integer
+api_hash = 'ADD UR API_HASH'  # Your API HASH (str)
+my_channel_id = 'my_channel_id'
+other_channel_id = 'TARGET TG CHANNEL'
+pd_chat_id = '@yourchatid'  #for updates
