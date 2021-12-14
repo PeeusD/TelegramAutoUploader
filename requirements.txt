@@ -1,0 +1,5 @@
+cryptg
+Telethon
+python-dotenv
+PyPDF2
+requests
