@@ -14,6 +14,7 @@ client = TelegramClient('anon', API_ID, API_HASH)
 
 OTHER_CHAT_ID = getenv('other_channel_id')
 MY_CHAT_ID = int(getenv('my_channel_id'))
+MY_CHAT_ID2 = int(getenv('my_channel_id2'))
 PD_CHAT_ID = getenv('pd_chat_id')
 
 
@@ -32,6 +33,7 @@ async def handler(event):
             #sending message to channel...
             msg = f"🌞 **Good Morning! **🌞  \n__{dat} \n{json_data['content']} \n- {json_data['author']}__"
             await client.send_message(entity=MY_CHAT_ID, message=msg, parse_mode='md')
+            await client.send_message(entity=MY_CHAT_ID2, message=msg, parse_mode='md')
 
 @client.on(events.NewMessage(chats=OTHER_CHAT_ID))
 async def handler(event):
@@ -42,35 +44,39 @@ async def handler(event):
             await event.download_media(file=open(event.file.name, "wb"))
             pdf_mgmt(event.file.name)
             await client.send_file(MY_CHAT_ID,file= open(event.file.name, 'rb'), thumb='thumb.jpg')
+            await client.send_file(MY_CHAT_ID2,file= open(event.file.name, 'rb'), thumb='thumb.jpg')
             m = await client.send_message(PD_CHAT_ID, f'Uploaded {event.file.name}')
-            await asyncio.sleep(10)
-            await client.delete_messages(PD_CHAT_ID, [m.id])
+            # await asyncio.sleep(10)
+            # await client.delete_messages(PD_CHAT_ID, [m.id])
             remove(event.file.name)
 
         elif 'IE DELHI' in event.file.name.upper():
             await event.download_media(file=open(event.file.name, "wb"))
             pdf_mgmt(event.file.name)
             await client.send_file(MY_CHAT_ID, open(event.file.name, 'rb'), thumb='thumb.jpg')
+            await client.send_file(MY_CHAT_ID2, open(event.file.name, 'rb'), thumb='thumb.jpg')
             m = await client.send_message(PD_CHAT_ID, f'Uploaded {event.file.name}')
-            await asyncio.sleep(10)
-            await client.delete_messages(PD_CHAT_ID, [m.id])
+            # await asyncio.sleep(10)
+            # await client.delete_messages(PD_CHAT_ID, [m.id])
             remove(event.file.name)
 
         elif 'MAGAZINE' in event.file.name.upper():
             await event.download_media(file=open(event.file.name, "wb"))
             pdf_mgmt(event.file.name)
             await client.send_file(MY_CHAT_ID, open(event.file.name, 'rb'), thumb='thumb.jpg')
+            await client.send_file(MY_CHAT_ID2, open(event.file.name, 'rb'), thumb='thumb.jpg')
             m = await client.send_message(PD_CHAT_ID, f'Uploaded {event.file.name}')
-            await asyncio.sleep(10)
-            await client.delete_messages(PD_CHAT_ID, [m.id])
+            # await asyncio.sleep(10)
+            # await client.delete_messages(PD_CHAT_ID, [m.id])
             remove(event.file.name)
             
         else:
             if not event.sticker:
                 await client.send_file(MY_CHAT_ID, event.message, schedule=datetime.timedelta(seconds=10))
+                await client.send_file(MY_CHAT_ID2, event.message, schedule=datetime.timedelta(seconds=10))
                 m = await client.send_message(PD_CHAT_ID, f'Uploaded {event.file.name}')
-                await asyncio.sleep(10)
-                await client.delete_messages(PD_CHAT_ID, [m.id])
+                # await asyncio.sleep(10)
+                # await client.delete_messages(PD_CHAT_ID, [m.id])
         
 
 def pdf_mgmt (f_name) :

@@ -2,5 +2,6 @@
 api_id = UR API ID       # Your API ID integer
 api_hash = 'ADD UR API_HASH'  # Your API HASH (str)
 my_channel_id = 'my_channel_id'
+my_channel_id2 = 'my_channel_id2'
 other_channel_id = 'TARGET TG CHANNEL'
 pd_chat_id = '@yourchatid'  #for updates
