@@ -25,7 +25,8 @@ async def handler(event):
     if event.sticker:
         if 'CAADBQADywIAAkwuuVeu_xH13qrbzwI' == event.file.id:
             #printing date 
-            dat = datetime.datetime.today().strftime('%d %B %Y')
+            dat = datetime.datetime.today() + datetime.timedelta(days=1)
+            dat = dat.strftime('%d %B %Y') 
                 #daily quotes api
             url = "https://api.quotable.io/random"
             response =  requests.get(url)
