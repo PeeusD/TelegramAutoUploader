@@ -73,8 +73,8 @@ async def handler(event):
             
         else:
             if not event.sticker:
-                await client.send_file(MY_CHAT_ID, event.message, schedule=datetime.timedelta(seconds=10))
-                await client.send_file(MY_CHAT_ID2, event.message, schedule=datetime.timedelta(seconds=10))
+                await client.send_file(MY_CHAT_ID, event.message, schedule=datetime.timedelta(seconds=70))
+                await client.send_file(MY_CHAT_ID2, event.message, schedule=datetime.timedelta(seconds=70))
                 m = await client.send_message(PD_CHAT_ID, f'Uploaded {event.file.name}')
                 # await asyncio.sleep(10)
                 # await client.delete_messages(PD_CHAT_ID, [m.id])
