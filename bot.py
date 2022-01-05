@@ -33,14 +33,18 @@ async def handler(event):
             url = "https://api.quotable.io/random"
             response =  requests.get(url)
             json_data = response.json()
-            bot_msg = 'Send New Post to Subscribers'
+            bot_msg1 = 'Send New Post to Subscribers'
+            bot_msg2 = 'Send Post to Subscribers'
             #sending message to channel and bot...
             msg = f"🌞 **Good Morning! **🌞  \n__{dat} \n{json_data['content']} \n- {json_data['author']}__"
             await client.send_message(entity=MY_CHAT_ID, message=msg, parse_mode='md')
             await client.send_message(entity=MY_CHAT_ID2, message=msg, parse_mode='md')
-            #sending message to bots
-            await client.send_message(entity=BOT_CHAT_ID, message=bot_msg)
-            await client.send_message(entity=BOT_CHAT_ID2, message=bot_msg)
+            #sending before message to bots
+            await client.send_message(entity=BOT_CHAT_ID, message=bot_msg1)
+            await client.send_message(entity=BOT_CHAT_ID2, message=bot_msg1)
+            #sending after message to bots
+            await client.send_message(entity=BOT_CHAT_ID, message=bot_msg2, schedule=datetime.timedelta(minutes=40))
+            await client.send_message(entity=BOT_CHAT_ID2, message=bot_msg2, schedule=datetime.timedelta(minutes=40))
             
 
 @client.on(events.NewMessage(chats=OTHER_CHAT_ID))
@@ -81,8 +85,8 @@ async def handler(event):
         else:
             if not event.sticker:
                 #forwarding files
-                await client.send_file(MY_CHAT_ID, event.message, schedule=datetime.timedelta(seconds=70))
-                await client.send_file(MY_CHAT_ID2, event.message, schedule=datetime.timedelta(seconds=70))
+                await client.send_file(MY_CHAT_ID, event.message, schedule=datetime.timedelta(minutes=2))
+                await client.send_file(MY_CHAT_ID2, event.message, schedule=datetime.timedelta(minutes=2))
                 m = await client.send_message(PD_CHAT_ID, f'Uploaded {event.file.name}')
                 # await asyncio.sleep(10)
                 # await client.delete_messages(PD_CHAT_ID, [m.id])
