@@ -12,9 +12,11 @@ API_ID = int(getenv('api_id'))
 API_HASH = getenv('api_hash')
 client = TelegramClient('anon', API_ID, API_HASH)
 
-OTHER_CHAT_ID = getenv('other_channel_id')
+OTHER_CHAT_ID =int(getenv('other_channel_id'))
 MY_CHAT_ID = int(getenv('my_channel_id'))
 MY_CHAT_ID2 = int(getenv('my_channel_id2'))
+BOT_CHAT_ID = getenv('bot_chat_id')
+BOT_CHAT_ID2 = getenv('bot_chat_id2')
 PD_CHAT_ID = getenv('pd_chat_id')
 
 
@@ -31,10 +33,15 @@ async def handler(event):
             url = "https://api.quotable.io/random"
             response =  requests.get(url)
             json_data = response.json()
-            #sending message to channel...
+            bot_msg = 'Send New Post to Subscribers'
+            #sending message to channel and bot...
             msg = f"🌞 **Good Morning! **🌞  \n__{dat} \n{json_data['content']} \n- {json_data['author']}__"
             await client.send_message(entity=MY_CHAT_ID, message=msg, parse_mode='md')
             await client.send_message(entity=MY_CHAT_ID2, message=msg, parse_mode='md')
+            #sending message to bots
+            await client.send_message(entity=BOT_CHAT_ID, message=bot_msg)
+            await client.send_message(entity=BOT_CHAT_ID2, message=bot_msg)
+            
 
 @client.on(events.NewMessage(chats=OTHER_CHAT_ID))
 async def handler(event):
@@ -73,12 +80,22 @@ async def handler(event):
             
         else:
             if not event.sticker:
+                #forwarding files
                 await client.send_file(MY_CHAT_ID, event.message, schedule=datetime.timedelta(seconds=70))
                 await client.send_file(MY_CHAT_ID2, event.message, schedule=datetime.timedelta(seconds=70))
                 m = await client.send_message(PD_CHAT_ID, f'Uploaded {event.file.name}')
                 # await asyncio.sleep(10)
                 # await client.delete_messages(PD_CHAT_ID, [m.id])
-        
+
+
+@client.on(events.NewMessage(chats=MY_CHAT_ID))
+async def handler(event):
+    if event.document:
+        if not event.sticker and 'TH' in event.file.name.upper() :
+            # forwarding files
+            await client.send_file(BOT_CHAT_ID, event.message)
+            await client.send_file(BOT_CHAT_ID2, event.message)
+
 
 def pdf_mgmt (f_name) :
     
