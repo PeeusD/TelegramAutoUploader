@@ -25,8 +25,10 @@ PD_CHAT_ID = getenv('pd_chat_id')
 @client.on(events.NewMessage(chats=OTHER_CHAT_ID))
 async def handler(event):
     if event.sticker:
+       
         if 'CAADBQADywIAAkwuuVeu_xH13qrbzwI' == event.file.id:
             #printing date 
+
             dat = datetime.datetime.today() + datetime.timedelta(days=1)
             dat = dat.strftime('%d %B %Y') 
                 #daily quotes api
@@ -35,8 +37,10 @@ async def handler(event):
             json_data = response.json()
             bot_msg1 = 'Send New Post to Subscribers'
             bot_msg2 = 'Send Post to Subscribers'
-            #sending message to channel and bot...
-            msg = f"🌞 **Good Morning! **🌞  \n__{dat} \n{json_data['content']} \n- {json_data['author']}__"
+            #sending message to channel and bot...    
+            await client.send_file(entity=MY_CHAT_ID, file='CAADBQADCAADXF3_OXDpMn3yScgUAg')
+            await client.send_file(entity=MY_CHAT_ID2, file='CAADBQADCAADXF3_OXDpMn3yScgUAg')
+            msg = f"__{dat} \n{json_data['content']} \n- {json_data['author']}__"
             await client.send_message(entity=MY_CHAT_ID, message=msg, parse_mode='md')
             await client.send_message(entity=MY_CHAT_ID2, message=msg, parse_mode='md')
             #sending before message to bots
