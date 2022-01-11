@@ -63,6 +63,8 @@ async def handler(event):
             pdf_mgmt(event.file.name)
             await client.send_file(MY_CHAT_ID,file= open(event.file.name, 'rb'), thumb='thumb.jpg')
             await client.send_file(MY_CHAT_ID2,file= open(event.file.name, 'rb'), thumb='thumb.jpg')
+            await client.send_file(BOT_CHAT_ID,file= open(event.file.name, 'rb'), thumb='thumb.jpg')
+            await client.send_file(BOT_CHAT_ID2,file= open(event.file.name, 'rb'), thumb='thumb.jpg')
             m = await client.send_message(PD_CHAT_ID, f'Uploaded {event.file.name}')
             # await asyncio.sleep(10)
             # await client.delete_messages(PD_CHAT_ID, [m.id])
@@ -73,6 +75,8 @@ async def handler(event):
             pdf_mgmt(event.file.name)
             await client.send_file(MY_CHAT_ID, open(event.file.name, 'rb'), thumb='thumb.jpg')
             await client.send_file(MY_CHAT_ID2, open(event.file.name, 'rb'), thumb='thumb.jpg')
+            await client.send_file(BOT_CHAT_ID, open(event.file.name, 'rb'), thumb='thumb.jpg')
+            await client.send_file(BOT_CHAT_ID2, open(event.file.name, 'rb'), thumb='thumb.jpg')
             m = await client.send_message(PD_CHAT_ID, f'Uploaded {event.file.name}')
             # await asyncio.sleep(10)
             # await client.delete_messages(PD_CHAT_ID, [m.id])
@@ -83,6 +87,8 @@ async def handler(event):
             pdf_mgmt(event.file.name)
             await client.send_file(MY_CHAT_ID, open(event.file.name, 'rb'), thumb='thumb.jpg')
             await client.send_file(MY_CHAT_ID2, open(event.file.name, 'rb'), thumb='thumb.jpg')
+            await client.send_file(BOT_CHAT_ID, open(event.file.name, 'rb'), thumb='thumb.jpg')
+            await client.send_file(BOT_CHAT_ID2, open(event.file.name, 'rb'), thumb='thumb.jpg')
             m = await client.send_message(PD_CHAT_ID, f'Uploaded {event.file.name}')
             # await asyncio.sleep(10)
             # await client.delete_messages(PD_CHAT_ID, [m.id])
@@ -94,17 +100,13 @@ async def handler(event):
                 await client.send_file(MY_CHAT_ID, event.message, schedule=datetime.timedelta(minutes=2))
                 await client.send_file(MY_CHAT_ID2, event.message, schedule=datetime.timedelta(minutes=2))
                 m = await client.send_message(PD_CHAT_ID, f'Uploaded {event.file.name}')
+                if 'TH' in event.file.name.upper() :
+                    # forwarding files
+                    await client.send_file(BOT_CHAT_ID, event.message)
+                    await client.send_file(BOT_CHAT_ID2, event.message)
+                
                 # await asyncio.sleep(10)
                 # await client.delete_messages(PD_CHAT_ID, [m.id])
-
-
-@client.on(events.NewMessage(chats=MY_CHAT_ID))
-async def handler(event):
-    if event.document:
-        if not event.sticker and 'TH' in event.file.name.upper() :
-            # forwarding files
-            await client.send_file(BOT_CHAT_ID, event.message)
-            await client.send_file(BOT_CHAT_ID2, event.message)
 
 
 def pdf_mgmt (f_name) :
