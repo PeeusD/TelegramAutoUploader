@@ -18,7 +18,8 @@ Obtain your own api id: https://core.telegram.org/api/obtaining_api_id
 
 # Usage
 
-You need to configure these values:
+Rename file `.envs` to `.env` and add required values into it or
+add these values to your config variable sections in cloud platform:
 
 | Environment Variable     | Command Line argument | Description                                                  
 |--------------------------|:-----------------------:|---------------------------------------------------------------|
@@ -26,7 +27,7 @@ You need to configure these values:
 | `api_id`                   | `--api-id`            | api_hash from https://core.telegram.org/api/obtaining_api_id  |
 | `bot_chat_id`              | `--bot_chat_id`       | Destination bots for downloaded files                | 
 | `bot_chat_id2`             | `--bot_chat_id`       | Destination bots for downloaded files                |
-| `my_channel_id`            | `--channel_id`        | Your Channel id 1                                        | 
-| `my_channel_id2`           | `--channel_id`        | Your Cahnnel id 2 |                                       |
-| `other_channel_id`         | `--channel_id`        | Other scrapped Channel id  | Get from @userbot           |
+| `my_channel_id`            | `--channel_id`        | Your Channel id 1   |      Get from @userbot         | 
+| `my_channel_id2`           | `--channel_id`        | Your Cahnnel id 2  |      Get from @userbot         |
+| `other_channel_id`         | `--channel_id`        | Other scrapped Channel id  | Get from @userbot       |
 | `pd_chat_id`               | `--your chat_id`      | Get from @botfather |                              |
