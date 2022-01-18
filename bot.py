@@ -3,8 +3,10 @@ from telethon import TelegramClient, events
 from os import remove, getenv, walk, path
 from dotenv import load_dotenv
 import PyPDF2 as pd
-import re
-import datetime, requests
+import re, pytz, datetime, requests
+
+
+
 load_dotenv()
 # Remember to use your own values from my.telegram.org!
 # Credentials while logging...
@@ -28,8 +30,8 @@ async def handler(event):
        
         if 'CAADBQADywIAAkwuuVeu_xH13qrbzwI' == event.file.id:
             #printing date 
-
-            dat = datetime.datetime.today() + datetime.timedelta(days=1)
+            dat = datetime.datetime.now(pytz.timezone('Asia/Kolkata'))
+            # dat = datetime.datetime.today() + datetime.timedelta(days=1)
             dat = dat.strftime('%d %B %Y') 
                 #daily quotes api
             url = "https://api.quotable.io/random"
