@@ -51,8 +51,8 @@ async def handler(event):
             await client.send_message(entity=BOT_CHAT_ID, message=msg, parse_mode='md')
             await client.send_message(entity=BOT_CHAT_ID2, message=msg, parse_mode='md')
             #sending after message to bots
-            await client.send_message(entity=BOT_CHAT_ID, message=bot_msg2, schedule=datetime.timedelta(minutes=30))
-            await client.send_message(entity=BOT_CHAT_ID2, message=bot_msg2, schedule=datetime.timedelta(minutes=30))
+            await client.send_message(entity=BOT_CHAT_ID, message=bot_msg2, schedule=datetime.timedelta(minutes=20))
+            await client.send_message(entity=BOT_CHAT_ID2, message=bot_msg2, schedule=datetime.timedelta(minutes=20))
             
 
 @client.on(events.NewMessage(chats=OTHER_CHAT_ID))
