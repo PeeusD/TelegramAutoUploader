@@ -3,8 +3,10 @@ from telethon import TelegramClient, events
 from os import remove, getenv, walk, path
 from dotenv import load_dotenv
 import PyPDF2 as pd
-import re
-import datetime, requests
+import re, pytz, datetime, requests
+
+
+
 load_dotenv()
 # Remember to use your own values from my.telegram.org!
 # Credentials while logging...
@@ -28,8 +30,8 @@ async def handler(event):
        
         if 'CAADBQADywIAAkwuuVeu_xH13qrbzwI' == event.file.id:
             #printing date 
-
-            dat = datetime.datetime.today() + datetime.timedelta(days=1)
+            dat = datetime.datetime.now(pytz.timezone('Asia/Kolkata'))
+            # dat = datetime.datetime.today() + datetime.timedelta(days=1)
             dat = dat.strftime('%d %B %Y') 
                 #daily quotes api
             url = "https://api.quotable.io/random"
@@ -49,8 +51,8 @@ async def handler(event):
             await client.send_message(entity=BOT_CHAT_ID, message=msg, parse_mode='md')
             await client.send_message(entity=BOT_CHAT_ID2, message=msg, parse_mode='md')
             #sending after message to bots
-            await client.send_message(entity=BOT_CHAT_ID, message=bot_msg2, schedule=datetime.timedelta(minutes=30))
-            await client.send_message(entity=BOT_CHAT_ID2, message=bot_msg2, schedule=datetime.timedelta(minutes=30))
+            await client.send_message(entity=BOT_CHAT_ID, message=bot_msg2, schedule=datetime.timedelta(minutes=20))
+            await client.send_message(entity=BOT_CHAT_ID2, message=bot_msg2, schedule=datetime.timedelta(minutes=20))
             
 
 @client.on(events.NewMessage(chats=OTHER_CHAT_ID))
@@ -75,8 +77,7 @@ async def handler(event):
             pdf_mgmt(event.file.name)
             await client.send_file(MY_CHAT_ID, open(event.file.name, 'rb'), thumb='thumb.jpg')
             await client.send_file(MY_CHAT_ID2, open(event.file.name, 'rb'), thumb='thumb.jpg')
-            await client.send_file(BOT_CHAT_ID, open(event.file.name, 'rb'), thumb='thumb.jpg')
-            await client.send_file(BOT_CHAT_ID2, open(event.file.name, 'rb'), thumb='thumb.jpg')
+           
             m = await client.send_message(PD_CHAT_ID, f'Uploaded {event.file.name}')
             # await asyncio.sleep(10)
             # await client.delete_messages(PD_CHAT_ID, [m.id])
