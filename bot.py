@@ -5,7 +5,9 @@ from dotenv import load_dotenv
 import PyPDF2 as pd
 import re, pytz, datetime, requests
 
-
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
 
 load_dotenv()
 # Remember to use your own values from my.telegram.org!
