@@ -45,14 +45,16 @@ async def handler(event):
             msg = f"__{dat} \n{json_data['content']} \n- {json_data['author']}__"
             await client.send_message(entity=MY_CHAT_ID, message=msg, parse_mode='md')
             await client.send_message(entity=MY_CHAT_ID2, message=msg, parse_mode='md')
+
             #sending before message to bots
-            await client.send_message(entity=BOT_CHAT_ID, message=bot_msg1)
-            await client.send_message(entity=BOT_CHAT_ID2, message=bot_msg1)
-            await client.send_message(entity=BOT_CHAT_ID, message=msg, parse_mode='md')
-            await client.send_message(entity=BOT_CHAT_ID2, message=msg, parse_mode='md')
+            # await client.send_message(entity=BOT_CHAT_ID, message=bot_msg1)
+            # await client.send_message(entity=BOT_CHAT_ID2, message=bot_msg1)
+            # await client.send_message(entity=BOT_CHAT_ID, message=msg, parse_mode='md')
+            # await client.send_message(entity=BOT_CHAT_ID2, message=msg, parse_mode='md')
+
             #sending after message to bots
-            await client.send_message(entity=BOT_CHAT_ID, message=bot_msg2, schedule=datetime.timedelta(minutes=20))
-            await client.send_message(entity=BOT_CHAT_ID2, message=bot_msg2, schedule=datetime.timedelta(minutes=20))
+            # await client.send_message(entity=BOT_CHAT_ID, message=bot_msg2, schedule=datetime.timedelta(minutes=20))
+            # await client.send_message(entity=BOT_CHAT_ID2, message=bot_msg2, schedule=datetime.timedelta(minutes=20))
             
 
 @client.on(events.NewMessage(chats=OTHER_CHAT_ID))
@@ -102,8 +104,8 @@ async def handler(event):
             if not event.sticker:
                 #forwarding files
                 await asyncio.sleep(30)
-                await client.send_file(MY_CHAT_ID, event.message, schedule=datetime.timedelta(minutes=2))
-                await client.send_file(MY_CHAT_ID2, event.message, schedule=datetime.timedelta(minutes=2))
+                await client.send_file(MY_CHAT_ID, event.message)
+                await client.send_file(MY_CHAT_ID2, event.message)
                 m = await client.send_message(PD_CHAT_ID, f'Uploaded {event.file.name}')
                 if 'TH' in event.file.name.upper() :
                     # forwarding files
