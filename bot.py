@@ -29,22 +29,25 @@ async def handler(event):
     if event.sticker:
        
         if 'CAADBQADywIAAkwuuVeu_xH13qrbzwI' == event.file.id:
+
             #printing date 
             dat = datetime.datetime.now(pytz.timezone('Asia/Kolkata'))
-            # dat = datetime.datetime.today() + datetime.timedelta(days=1)
             dat = dat.strftime('%d %B %Y') 
-                #daily quotes api
-            url = "https://api.quotable.io/random"
-            response =  requests.get(url)
-            json_data = response.json()
+            
+             #daily quotes api
+            # url = "https://api.quotable.io/random"
+            # response =  requests.get(url)
+            # json_data = response.json()
+            # msg = f"__{dat} \n{json_data['content']} \n- {json_data['author']}__"
             bot_msg1 = 'Send New Post to Subscribers'
             bot_msg2 = 'Send Post to Subscribers'
+
             #sending message to channel and bot...    
             await client.send_file(entity=MY_CHAT_ID, file='CAADBQADCAADXF3_OXDpMn3yScgUAg')
             await client.send_file(entity=MY_CHAT_ID2, file='CAADBQADCAADXF3_OXDpMn3yScgUAg')
-            msg = f"__{dat} \n{json_data['content']} \n- {json_data['author']}__"
-            await client.send_message(entity=MY_CHAT_ID, message=msg, parse_mode='md')
-            await client.send_message(entity=MY_CHAT_ID2, message=msg, parse_mode='md')
+           
+            # await client.send_message(entity=MY_CHAT_ID, message=msg, parse_mode='md')
+            # await client.send_message(entity=MY_CHAT_ID2, message=msg, parse_mode='md')
 
             #sending before message to bots
             # await client.send_message(entity=BOT_CHAT_ID, message=bot_msg1)
@@ -63,20 +66,22 @@ async def handler(event):
     # filtering documents
     if event.document:
         if 'TH-DELHI' in event.file.name.upper():
-            await asyncio.sleep(30)
+            await asyncio.sleep(10)
             await event.download_media(file=open(event.file.name, "wb"))
             pdf_mgmt(event.file.name)
             await client.send_file(MY_CHAT_ID,file= open(event.file.name, 'rb'), thumb='thumb.jpg')
             await client.send_file(MY_CHAT_ID2,file= open(event.file.name, 'rb'), thumb='thumb.jpg')
-            await client.send_file(BOT_CHAT_ID,file= open(event.file.name, 'rb'), thumb='thumb.jpg')
-            await client.send_file(BOT_CHAT_ID2,file= open(event.file.name, 'rb'), thumb='thumb.jpg')
+
+            # await client.send_file(BOT_CHAT_ID,file= open(event.file.name, 'rb'), thumb='thumb.jpg')
+            # await client.send_file(BOT_CHAT_ID2,file= open(event.file.name, 'rb'), thumb='thumb.jpg')
             m = await client.send_message(PD_CHAT_ID, f'Uploaded {event.file.name}')
+
             # await asyncio.sleep(10)
             # await client.delete_messages(PD_CHAT_ID, [m.id])
             remove(event.file.name)
 
         elif 'IE DELHI' in event.file.name.upper():
-            await asyncio.sleep(30)
+            await asyncio.sleep(10)
             await event.download_media(file=open(event.file.name, "wb"))
             pdf_mgmt(event.file.name)
             await client.send_file(MY_CHAT_ID, open(event.file.name, 'rb'), thumb='thumb.jpg')
@@ -88,13 +93,14 @@ async def handler(event):
             remove(event.file.name)
 
         elif 'MAGAZINE' in event.file.name.upper():
-            await asyncio.sleep(30)
+            await asyncio.sleep(10)
             await event.download_media(file=open(event.file.name, "wb"))
             pdf_mgmt(event.file.name)
             await client.send_file(MY_CHAT_ID, open(event.file.name, 'rb'), thumb='thumb.jpg')
             await client.send_file(MY_CHAT_ID2, open(event.file.name, 'rb'), thumb='thumb.jpg')
-            await client.send_file(BOT_CHAT_ID, open(event.file.name, 'rb'), thumb='thumb.jpg')
-            await client.send_file(BOT_CHAT_ID2, open(event.file.name, 'rb'), thumb='thumb.jpg')
+
+            # await client.send_file(BOT_CHAT_ID, open(event.file.name, 'rb'), thumb='thumb.jpg')
+            # await client.send_file(BOT_CHAT_ID2, open(event.file.name, 'rb'), thumb='thumb.jpg')
             m = await client.send_message(PD_CHAT_ID, f'Uploaded {event.file.name}')
             # await asyncio.sleep(10)
             # await client.delete_messages(PD_CHAT_ID, [m.id])
@@ -103,14 +109,15 @@ async def handler(event):
         else:
             if not event.sticker:
                 #forwarding files
-                await asyncio.sleep(30)
+                await asyncio.sleep(50)
                 await client.send_file(MY_CHAT_ID, event.message)
                 await client.send_file(MY_CHAT_ID2, event.message)
                 m = await client.send_message(PD_CHAT_ID, f'Uploaded {event.file.name}')
-                if 'TH' in event.file.name.upper() :
+                # if 'TH' in event.file.name.upper() :
+
                     # forwarding files
-                    await client.send_file(BOT_CHAT_ID, event.message)
-                    await client.send_file(BOT_CHAT_ID2, event.message)
+                    # await client.send_file(BOT_CHAT_ID, event.message)
+                    # await client.send_file(BOT_CHAT_ID2, event.message)
                 
                 # await asyncio.sleep(10)
                 # await client.delete_messages(PD_CHAT_ID, [m.id])
