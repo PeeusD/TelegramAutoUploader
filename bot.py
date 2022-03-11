@@ -29,10 +29,10 @@ PD_CHAT_ID = getenv('pd_chat_id')
 @client.on(events.NewMessage(chats=OTHER_CHAT_ID))
 async def handler(event):
  try:  
-    if event.sticker:
+    # if event.sticker:
        
-        if 'CAADBQADywIAAkwuuVeu_xH13qrbzwI' == event.file.id:
-
+        # if 'CAADBQADywIAAkwuuVeu_xH13qrbzwI' == event.file.id:
+        if 'JAI HIND' in event.raw_text:
             #printing date 
             dat = datetime.datetime.now(pytz.timezone('Asia/Kolkata'))
             dat = dat.strftime('%d %B %Y') 
