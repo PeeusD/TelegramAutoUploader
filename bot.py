@@ -3,11 +3,8 @@ from telethon import TelegramClient, events
 from os import remove, getenv, walk, path
 from dotenv import load_dotenv
 import PyPDF2 as pd
-import re, pytz, datetime, requests
-from telethon.errors import MultiError
-
-
-
+import re, pytz, datetime, requests, time
+from telethon import errors
 
 load_dotenv()
 # Remember to use your own values from my.telegram.org!
@@ -29,10 +26,9 @@ PD_CHAT_ID = getenv('pd_chat_id')
 @client.on(events.NewMessage(chats=OTHER_CHAT_ID))
 async def handler(event):
  try:  
-    # if event.sticker:
-       
-        # if 'CAADBQADywIAAkwuuVeu_xH13qrbzwI' == event.file.id:
-        if 'JAI HIND' in event.raw_text:
+    if event.sticker:
+        if 'CAADBQADywIAAkwuuVeu_xH13qrbzwI' == event.file.id:
+        # if 'JAI HIND' in event.raw_text:
             #printing date 
             dat = datetime.datetime.now(pytz.timezone('Asia/Kolkata'))
             dat = dat.strftime('%d %B %Y') 
@@ -64,8 +60,9 @@ async def handler(event):
                 client.send_message(entity=BOT_CHAT_ID, message=bot_msg2, schedule=datetime.timedelta(minutes=20)),
                 client.send_message(entity=BOT_CHAT_ID2, message=bot_msg2, schedule=datetime.timedelta(minutes=20)),
                 ])
- except MultiError as e:
-        print(e.exceptions)
+ except errors.FloodWaitError as e:
+    print('Have to sleep', e.seconds, 'seconds')
+    time.sleep(e.seconds)
 
 @client.on(events.NewMessage(chats=OTHER_CHAT_ID))
 async def handler(event):
@@ -131,8 +128,10 @@ async def handler(event):
                 
                 # await asyncio.sleep(10)
                 # await client.delete_messages(PD_CHAT_ID, [m.id])
- except MultiError as e:
-        print(e.exceptions)
+ except errors.FloodWaitError as e:
+    print('Have to sleep', e.seconds, 'seconds')
+    time.sleep(e.seconds)
+
 
 def pdf_mgmt (f_name) :
     
