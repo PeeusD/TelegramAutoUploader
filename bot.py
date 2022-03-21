@@ -26,7 +26,7 @@ PD_CHAT_ID = getenv('pd_chat_id')
 @client.on(events.NewMessage(chats=OTHER_CHAT_ID))
 async def handler(event):
  try:  
-    if event.sticker:
+    if event.sticker: 
         if 'CAADBQADywIAAkwuuVeu_xH13qrbzwI' == event.file.id:
         # if 'JAI HIND' in event.raw_text:
             #printing date 
@@ -42,42 +42,51 @@ async def handler(event):
             bot_msg2 = 'Send Post to Subscribers'
 
             #sending message to channel and bot... 
-            await asyncio.wait([   
+             
             # sending stickers
-                client.send_file(entity=MY_CHAT_ID, file='CAADBQADCAADXF3_OXDpMn3yScgUAg'),
-                client.send_file(entity=MY_CHAT_ID2, file='CAADBQADCAADXF3_OXDpMn3yScgUAg'),
-                # sending greet messages
-                client.send_message(entity=MY_CHAT_ID, message=msg, parse_mode='md'),
-                client.send_message(entity=MY_CHAT_ID2, message=msg, parse_mode='md'),
+            asyncio.sleep(6),
+            await client.send_file(entity=MY_CHAT_ID, file='CAADBQADCAADXF3_OXDpMn3yScgUAg'),
+            asyncio.sleep(6),
+            await client.send_file(entity=MY_CHAT_ID2, file='CAADBQADCAADXF3_OXDpMn3yScgUAg'),
+            asyncio.sleep(6),
+            # sending greet messages
+            await client.send_message(entity=MY_CHAT_ID, message=msg, parse_mode='md'),
+            asyncio.sleep(6),
+            await client.send_message(entity=MY_CHAT_ID2, message=msg, parse_mode='md'),
+            asyncio.sleep(6),
 
-                #sending before message to bots
-                client.send_message(entity=BOT_CHAT_ID, message=bot_msg1),
-                client.send_message(entity=BOT_CHAT_ID2, message=bot_msg1),
-                client.send_message(entity=BOT_CHAT_ID, message=msg, parse_mode='md'),
-                client.send_message(entity=BOT_CHAT_ID2, message=msg, parse_mode='md'),
+            #sending before message to bots
+            await client.send_message(entity=BOT_CHAT_ID, message=bot_msg1),
+            asyncio.sleep(6),
+            await client.send_message(entity=BOT_CHAT_ID2, message=bot_msg1),
+            asyncio.sleep(6),
+            await client.send_message(entity=BOT_CHAT_ID, message=msg, parse_mode='md'),
+            asyncio.sleep(6),
+            await client.send_message(entity=BOT_CHAT_ID2, message=msg, parse_mode='md'),
+            asyncio.sleep(6),
 
-                #sending after message to bots
-                client.send_message(entity=BOT_CHAT_ID, message=bot_msg2, schedule=datetime.timedelta(minutes=20)),
-                client.send_message(entity=BOT_CHAT_ID2, message=bot_msg2, schedule=datetime.timedelta(minutes=20)),
-                ])
- except errors.FloodWaitError as e:
-    print('Have to sleep', e.seconds, 'seconds')
-    time.sleep(e.seconds)
+            #sending after message to bots
+            await client.send_message(entity=BOT_CHAT_ID, message=bot_msg2, schedule=datetime.timedelta(minutes=20)),
+            asyncio.sleep(6),
+            await client.send_message(entity=BOT_CHAT_ID2, message=bot_msg2, schedule=datetime.timedelta(minutes=20)),
+            
 
-@client.on(events.NewMessage(chats=OTHER_CHAT_ID))
-async def handler(event):
- try:
-    # filtering documents
+     # filtering documents
     if event.document:
         if 'TH-DELHI' in event.file.name.upper():
+            await asyncio.sleep(10)
             await event.download_media(file=open(event.file.name, "wb"))
             pdf_mgmt(event.file.name)
-            await asyncio.wait([ 
-                client.send_file(MY_CHAT_ID,file= open(event.file.name, 'rb'), thumb='thumb.jpg'),
-                client.send_file(MY_CHAT_ID2,file= open(event.file.name, 'rb'), thumb='thumb.jpg'),
+        
+            asyncio.sleep(6),
+            await client.send_file(MY_CHAT_ID,file= open(event.file.name, 'rb'), thumb='thumb.jpg'),
+            asyncio.sleep(6),
+            await client.send_file(MY_CHAT_ID2,file= open(event.file.name, 'rb'), thumb='thumb.jpg'),
+            asyncio.sleep(6),
 
-                client.send_file(BOT_CHAT_ID,file= open(event.file.name, 'rb'), thumb='thumb.jpg'),
-                client.send_file(BOT_CHAT_ID2,file= open(event.file.name, 'rb'), thumb='thumb.jpg') ])
+            await client.send_file(BOT_CHAT_ID,file= open(event.file.name, 'rb'), thumb='thumb.jpg'),
+            asyncio.sleep(6),
+            await client.send_file(BOT_CHAT_ID2,file= open(event.file.name, 'rb'), thumb='thumb.jpg')
             # await client.send_message(PD_CHAT_ID, f'Uploaded {event.file.name}')
 
             # await asyncio.sleep(10)
@@ -85,12 +94,14 @@ async def handler(event):
             remove(event.file.name)
 
         elif 'IE DELHI' in event.file.name.upper():
-            # await asyncio.sleep(10)
+            await asyncio.sleep(10)
             await event.download_media(file=open(event.file.name, "wb"))
             pdf_mgmt(event.file.name)
-            await asyncio.wait([ 
-                client.send_file(MY_CHAT_ID, open(event.file.name, 'rb'), thumb='thumb.jpg'),
-                client.send_file(MY_CHAT_ID2, open(event.file.name, 'rb'), thumb='thumb.jpg') ])
+            
+            asyncio.sleep(6),
+            await client.send_file(MY_CHAT_ID, open(event.file.name, 'rb'), thumb='thumb.jpg'),
+            asyncio.sleep(6),
+            await client.send_file(MY_CHAT_ID2, open(event.file.name, 'rb'), thumb='thumb.jpg') 
            
             # m = await client.send_message(PD_CHAT_ID, f'Uploaded {event.file.name}')
             # await asyncio.sleep(10)
@@ -98,15 +109,19 @@ async def handler(event):
             remove(event.file.name)
 
         elif 'MAGAZINE' in event.file.name.upper():
-            # await asyncio.sleep(10)
+            await asyncio.sleep(10)
             await event.download_media(file=open(event.file.name, "wb"))
             pdf_mgmt(event.file.name)
-            await asyncio.wait([   
-                client.send_file(MY_CHAT_ID, open(event.file.name, 'rb'), thumb='thumb.jpg'),
-                client.send_file(MY_CHAT_ID2, open(event.file.name, 'rb'), thumb='thumb.jpg'), 
+              
+            asyncio.sleep(6), 
+            await client.send_file(MY_CHAT_ID, open(event.file.name, 'rb'), thumb='thumb.jpg'),
+            asyncio.sleep(6),
+            await client.send_file(MY_CHAT_ID2, open(event.file.name, 'rb'), thumb='thumb.jpg'),
+            asyncio.sleep(6), 
 
-                client.send_file(BOT_CHAT_ID, open(event.file.name, 'rb'), thumb='thumb.jpg'),
-                client.send_file(BOT_CHAT_ID2, open(event.file.name, 'rb'), thumb='thumb.jpg') ])
+            await client.send_file(BOT_CHAT_ID, open(event.file.name, 'rb'), thumb='thumb.jpg'),
+            asyncio.sleep(6),
+            await client.send_file(BOT_CHAT_ID2, open(event.file.name, 'rb'), thumb='thumb.jpg') 
             # m = await client.send_message(PD_CHAT_ID, f'Uploaded {event.file.name}')
             # await asyncio.sleep(10)
             # await client.delete_messages(PD_CHAT_ID, [m.id])
@@ -115,16 +130,19 @@ async def handler(event):
         else:
             if not event.sticker:
                 #forwarding files
-                await asyncio.wait([   
-                     client.send_file(MY_CHAT_ID, event.message),
-                     client.send_file(MY_CHAT_ID2, event.message) ])
+                 
+                asyncio.sleep(6),
+                await client.send_file(MY_CHAT_ID, event.message),
+                asyncio.sleep(6),
+                await client.send_file(MY_CHAT_ID2, event.message) 
                 # m = await client.send_message(PD_CHAT_ID, f'Uploaded {event.file.name}')
                 if 'TH' in event.file.name.upper() :
 
-                    # forwarding files
-                    await asyncio.wait([   
-                        client.send_file(BOT_CHAT_ID, event.message),
-                        client.send_file(BOT_CHAT_ID2, event.message) ])
+                    # forwarding files 
+                    asyncio.sleep(6),  
+                    await client.send_file(BOT_CHAT_ID, event.message),
+                    asyncio.sleep(6),
+                    await client.send_file(BOT_CHAT_ID2, event.message) 
                 
                 # await asyncio.sleep(10)
                 # await client.delete_messages(PD_CHAT_ID, [m.id])
