@@ -5,7 +5,8 @@ from dotenv import load_dotenv
 import PyPDF2 as pd
 import re, pytz, datetime, requests
 from telethon.errors import MultiError
-
+import logging
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s', level=logging.WARNING)
 
 
 
