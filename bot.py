@@ -52,8 +52,8 @@ async def handler(event):
                 client.send_file(entity=MY_CHAT_ID, file='CAADBQADCAADXF3_OXDpMn3yScgUAg'),
                 client.send_file(entity=MY_CHAT_ID2, file='CAADBQADCAADXF3_OXDpMn3yScgUAg'),
                 # sending greet messages
-                client.send_message(entity=MY_CHAT_ID, message=msg, parse_mode='md'),
-                client.send_message(entity=MY_CHAT_ID2, message=msg, parse_mode='md'),
+                client.send_message(entity=MY_CHAT_ID, message=msg, parse_mode='md', schedule=datetime.timedelta(seconds=2)),
+                client.send_message(entity=MY_CHAT_ID2, message=msg, parse_mode='md', schedule=datetime.timedelta(seconds=2)),
 
                 #sending before message to bots
                 client.send_message(entity=BOT_CHAT_ID, message=bot_msg1),
