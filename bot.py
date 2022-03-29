@@ -42,9 +42,10 @@ async def handler(event):
             url = "https://api.quotable.io/random"
             response =  requests.get(url)
             json_data = response.json()
-            msg = f"__{dat} \n{json_data['content']} \n- {json_data['author']}__"
             bot_msg1 = 'Send New Post to Subscribers'
             bot_msg2 = 'Send Post to Subscribers'
+            msg = f"__{dat} \n{json_data['content']} \n- {json_data['author']}__"
+            
 
             #sending message to channel and bot... 
             await asyncio.wait([   
@@ -52,8 +53,8 @@ async def handler(event):
                 client.send_file(entity=MY_CHAT_ID, file='CAADBQADCAADXF3_OXDpMn3yScgUAg'),
                 client.send_file(entity=MY_CHAT_ID2, file='CAADBQADCAADXF3_OXDpMn3yScgUAg'),
                 # sending greet messages
-                client.send_message(entity=MY_CHAT_ID, message=msg, parse_mode='md', schedule=datetime.timedelta(seconds=2)),
-                client.send_message(entity=MY_CHAT_ID2, message=msg, parse_mode='md', schedule=datetime.timedelta(seconds=2)),
+                client.send_message(entity=MY_CHAT_ID, message=msg, parse_mode='md', schedule=datetime.timedelta(seconds=4)),
+                client.send_message(entity=MY_CHAT_ID2, message=msg, parse_mode='md', schedule=datetime.timedelta(seconds=4)),
 
                 #sending before message to bots
                 client.send_message(entity=BOT_CHAT_ID, message=bot_msg1),
