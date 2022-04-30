@@ -1,5 +1,5 @@
 cryptg
-Telethon==1.24.0
+Telethon==1.23.0
 python-dotenv==0.18.0
 PyPDF2==1.26.0
 requests==2.25.1
