@@ -4,5 +4,5 @@ python-dotenv==0.18.0
 PyPDF2==1.26.0
 requests==2.25.1
 pytz==2021.1
-mega.py==1.0.8
+# mega.py==1.0.8
 
