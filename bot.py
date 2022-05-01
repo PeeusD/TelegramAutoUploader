@@ -1,4 +1,5 @@
 import asyncio
+from mega import Mega
 from telethon import TelegramClient, events
 from os import remove, getenv, walk, path
 from dotenv import load_dotenv
@@ -8,8 +9,6 @@ from telethon.errors import MultiError
 import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s', level=logging.WARNING)
 
-
-
 load_dotenv()
 # Remember to use your own values from my.telegram.org!
 # Credentials while logging...
@@ -17,6 +16,12 @@ API_ID = int(getenv('api_id'))
 API_HASH = getenv('api_hash')
 client = TelegramClient('anon', API_ID, API_HASH)
 
+# Credentials for MEGA drive
+mega = Mega()
+email = getenv('EMAIL')
+password = getenv('PASSWORD')
+
+# Telegram ChatId
 OTHER_CHAT_ID =int(getenv('other_channel_id'))
 MY_CHAT_ID = int(getenv('my_channel_id'))
 MY_CHAT_ID2 = int(getenv('my_channel_id2'))
@@ -24,7 +29,7 @@ BOT_CHAT_ID = getenv('bot_chat_id')
 BOT_CHAT_ID2 = getenv('bot_chat_id2')
 PD_CHAT_ID = getenv('pd_chat_id')
 
-
+m = mega.login(email, password)
 #Capturing messages from the targetted Telegram Channel
 
 @client.on(events.NewMessage(chats=OTHER_CHAT_ID))
@@ -83,10 +88,14 @@ async def handler(event):
 
                 client.send_file(BOT_CHAT_ID,file= open(event.file.name, 'rb'), thumb='thumb.jpg'),
                 client.send_file(BOT_CHAT_ID2,file= open(event.file.name, 'rb'), thumb='thumb.jpg') ])
+            
+            
             # await client.send_message(PD_CHAT_ID, f'Uploaded {event.file.name}')
 
             # await asyncio.sleep(10)
             # await client.delete_messages(PD_CHAT_ID, [m.id])
+            folder = m.find('The Hindu')
+            m.upload(event.file.name, folder[0])
             remove(event.file.name)
 
         elif 'IE DELHI' in event.file.name.upper():
