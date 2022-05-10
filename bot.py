@@ -74,7 +74,7 @@ async def handler(event):
  try:
     # filtering documents
     if event.document:
-        if 'TH-DELHI' in event.file.name.upper():
+        if 'TH' and 'DELHI' in event.file.name.upper():
             await event.download_media(file=open(event.file.name, "wb"))
             pdf_mgmt(event.file.name)
             await asyncio.wait([ 
@@ -89,7 +89,7 @@ async def handler(event):
             # await client.delete_messages(PD_CHAT_ID, [m.id])
             remove(event.file.name)
 
-        elif 'IE DELHI' in event.file.name.upper():
+        elif 'IE' and 'DELHI' in event.file.name.upper():
             # await asyncio.sleep(10)
             await event.download_media(file=open(event.file.name, "wb"))
             pdf_mgmt(event.file.name)
@@ -102,7 +102,7 @@ async def handler(event):
             # await client.delete_messages(PD_CHAT_ID, [m.id])
             remove(event.file.name)
 
-        elif 'MAGAZINE' in event.file.name.upper():
+        elif 'TH' and 'MAGAZINE' in event.file.name.upper():
             # await asyncio.sleep(10)
             await event.download_media(file=open(event.file.name, "wb"))
             pdf_mgmt(event.file.name)
