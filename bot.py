@@ -8,8 +8,6 @@ from telethon.errors import MultiError
 import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s', level=logging.WARNING)
 
-
-
 load_dotenv()
 # Remember to use your own values from my.telegram.org!
 # Credentials while logging...
@@ -17,6 +15,8 @@ API_ID = int(getenv('api_id'))
 API_HASH = getenv('api_hash')
 client = TelegramClient('anon', API_ID, API_HASH)
 
+
+# Telegram ChatId
 OTHER_CHAT_ID =int(getenv('other_channel_id'))
 MY_CHAT_ID = int(getenv('my_channel_id'))
 MY_CHAT_ID2 = int(getenv('my_channel_id2'))
@@ -83,10 +83,13 @@ async def handler(event):
 
                 client.send_file(BOT_CHAT_ID,file= open(event.file.name, 'rb'), thumb='thumb.jpg'),
                 client.send_file(BOT_CHAT_ID2,file= open(event.file.name, 'rb'), thumb='thumb.jpg') ])
+            
+            
             # await client.send_message(PD_CHAT_ID, f'Uploaded {event.file.name}')
 
             # await asyncio.sleep(10)
             # await client.delete_messages(PD_CHAT_ID, [m.id])
+           
             remove(event.file.name)
 
         elif 'IE' and 'DELHI' in event.file.name.upper():
